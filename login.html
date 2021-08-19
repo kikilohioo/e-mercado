@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <meta name="google-signin-client_id" content="96471566518-8qvr9dt10sj7prbsk48k4tpbrc1k9ut5.apps.googleusercontent.com">
+  <style>
+    html, body{
+      height: 100%;
+    }
+
+    body {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: rgb(248,249,250);
+      text-align: center;
+    }
+
+    .signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+      transform: translateY(-100px);
+    }
+    .signin img{
+      transform: translateX(-17px);
+    }
+    .signin input{
+      padding: 5px;
+      width: 100%;
+      margin: 3px 0px;
+    }
+    .signin span{
+      position: absolute;
+      transform: translate(-65px,9px);
+      color: rgb(56, 65, 153);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .signin span:hover{
+      color: rgb(129, 141, 241);
+    }
+    #sesinit{
+      width: auto;
+      margin: 10px 5px 0px 5px;
+    }
+    .g-signin2{
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
+    .g-signin2 div div span span{
+      transform: translate(27px,-7px);
+    }
+  </style>
+</head>
+
+<body class="text-center">
+    <form action="index.html" class="signin">
+      <img src="img/login.png" alt="logo" width="330">
+      <h3>Iniciar Sesión</h3>
+      <input type="email" name="user" placeholder="Email" id="user" required>
+      <br><input type="password" placeholder="Contraseña" name="pwd" id="pwd" required><span onclick="mostrarPwd()">mostrar</span>
+      <input type="checkbox" name="sesinit" id="sesinit"><label for="sesinit">Mantener mi sesión iniciada</label>
+      <br><input type="submit" value="Iniciar Sesión" required>
+      <p>o tambien puedes</p>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <a href="register.html">¿Aun no tienes cuenta? Registrate</a>
+    </form>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
+  <script>
+    function mostrarPwd(){
+      let pwd = document.getElementById("pwd");
+      if(pwd.type == "password"){
+        pwd.type = "text";
+      }else if(pwd.type == "text"){
+        pwd.type = "password";
+      }
+    }
+  </script>
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
