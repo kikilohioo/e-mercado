@@ -2,14 +2,14 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    let main = document.getElementById("main");
-    main.innerHTML = "";
+    let productgrid = document.getElementById("productgrid");
+    productgrid.innerHTML = "";
     fetch(PRODUCTS_URL)
         .then(respuesta => respuesta.json())
 
         .then(datos => {
             for(let producto of datos){
-                main.innerHTML += 
+                productgrid.innerHTML += 
                 `<a href="product-info.html" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-3">
