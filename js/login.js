@@ -6,12 +6,16 @@ function onSignIn(){
     window.location.href = "inicio.html";
 }
 function getUserName(){
-    let user = document.getElementById("user").value;
+    let email = document.getElementById("user").value;
     let mistorage = window.localStorage;
     fetch(USERS_URL)
         .then(respuesta => respuesta.json())
         .then(datos => {
-            mistorage.setItem('username', user);
+            for(let user of datos){
+                if(email == user.email){
+                    mistorage.setItem('username', user.name);
+                }
+            }
         }).catch(error => alert(error))
 }
 document.addEventListener("DOMContentLoaded", function(e){
