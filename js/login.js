@@ -1,22 +1,18 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
 function onSignIn(){
     window.location.href = "inicio.html";
 }
 function getUserName(){
-    let email = document.getElementById("user").value;
+    let user = document.getElementById("user").value;
     let mistorage = window.localStorage;
-    fetch("../users.json")
-    .then(respuesta => respuesta.json())
-    .then(datos => {
-        for(let user of datos){
-            if(email == user.name){
-                mistorage.setItem('username', user.name);
-            }
-        }
-    }).
-    catch(error => alert(error));
+    fetch(USERS_URL)
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            mistorage.setItem('username', user);
+        }).catch(error => alert(error))
 }
 document.addEventListener("DOMContentLoaded", function(e){
     
