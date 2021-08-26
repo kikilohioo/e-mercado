@@ -10,8 +10,8 @@ function getUserName(){
     let mistorage = window.localStorage;
     fetch(USERS_URL)
         .then(respuesta => respuesta.json())
-        .then(datos => {
-            for(let user of datos){
+        .then(users => {
+            for(let user of users){
                 if(email == user.email){
                     mistorage.setItem('username', user.name);
                 }
