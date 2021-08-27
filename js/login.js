@@ -1,7 +1,7 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
+let USERS_URL = "http://localhost:8888/e-mercado/e-mercado/users.json";
 function onSignIn(){
     window.location.href = "inicio.html";
 }
@@ -14,6 +14,7 @@ function getUserName(){
             for(let user of users){
                 if(email == user.email){
                     mistorage.setItem('username', user.name);
+                    window.location.href = "inicio.html";
                 }
             }
         }).catch(error => alert(error))
