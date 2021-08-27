@@ -20,11 +20,11 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     }
 })
 
-function searchFromResultList(nombreArt){
+function searchFromResultList(nombreart){
     let results = document.getElementById("results"); 
     results.style.display = "none";
     let searchbox = document.getElementById("searchbox").value;
-    searchbox = nombreArt;
+    searchbox = nombreart;
 
  /*   fetch(PRODUCTS_URL)
         .then(respuesta => respuesta.json())
