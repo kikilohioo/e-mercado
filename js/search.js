@@ -1,4 +1,9 @@
-
+function searchFromResultList(nombreart){
+    let results = document.getElementById("results"); 
+    results.style.display = "none";
+    let searchbox = document.getElementById("searchbox").value;
+    searchbox = nombreart;
+}
 document.getElementById("searchbox").addEventListener("keyup", function(e){
     let results = document.getElementById("results");
     let searchbox = document.getElementById("searchbox").value.toLowerCase();
@@ -20,9 +25,3 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     }
 })
 
-function searchFromResultList(nombreart){
-    let results = document.getElementById("results"); 
-    results.style.display = "none";
-    let searchbox = document.getElementById("searchbox").value;
-    searchbox = nombreart;
-}
