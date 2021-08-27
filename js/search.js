@@ -1,7 +1,7 @@
 document.getElementById("searchbox").addEventListener("keyup", function(e){
     let results = document.getElementById("results");
     let searchbox = document.getElementById("searchbox").value.toLowerCase();
-
+    results.innerHTML ="";
     if(searchbox.value != ""){
         results.style.display = "block";
     }else{
