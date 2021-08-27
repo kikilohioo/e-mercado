@@ -11,15 +11,15 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     fetch(PRODUCTS_URL)
     .then(respuesta => respuesta.json())
     .then(productos => {
-        for(let producto of productos){
-            let nombre = producto.name.toLowerCase();
-            if(searchbox.value != ""){
+        if(searchbox.value != ""){
+            for(let producto of productos){
+                let nombre = producto.name.toLowerCase();
                 if(nombre.indexOf(searchbox) != -1){
                     results.innerHTML += `<a href="#" class="list-group-item list-group-item-action">`+ producto.name +`</a>`;
                 }
-            }else{
-                results.style.display = "none";
             }
+        }else{
+            results.style.display = "none";
         }
     }).catch(error => alert(error))
 })
