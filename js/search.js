@@ -18,7 +18,7 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     }else{
         results.style.display = "none";
     }
-})
+});
 
 function searchFromResultList(nombreart){
     let results = document.getElementById("results"); 
