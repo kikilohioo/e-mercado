@@ -1,7 +1,7 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-let USERS_URL = "https://kikilohioo.github.io/e-mercado/e-mercado/users.json";
+let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
 function onSignIn(){
     window.location.href = "inicio.html";
 }
