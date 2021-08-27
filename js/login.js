@@ -2,6 +2,8 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
+let mistorage = window.localStorage;
+
 function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
     mistorage.setItem('username', profile.getName());
@@ -9,7 +11,6 @@ function onSignIn(googleUser){
 }
 function getUserName(){
     let email = document.getElementById("user").value;
-    let mistorage = window.localStorage;
     fetch(USERS_URL)
         .then(respuesta => respuesta.json())
         .then(users => {
