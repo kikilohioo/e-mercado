@@ -1,5 +1,5 @@
 let results = document.getElementById("results");
-let searchbox = document.getElementById("searchbox").value;
+let searchbox = document.getElementById("searchbox").value.toLowerCase();
 
 function searchFromResultList(articulo){
     /*searchbox = articulo;
@@ -27,7 +27,7 @@ function searchFromResultList(articulo){
                     </div>
                 </a>`;
             }
-        }).catch(error => alert(error))*/
+        }).catch(error => alert(error))*/   
 }
 
 document.getElementById("searchbox").addEventListener("keyup", function(e){
@@ -39,7 +39,7 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
             
                 for(let producto of productos){
                     let nombre = producto.name.toLowerCase();
-                    if(nombre.indexOf(searchbox.toLowerCase()) != -1){
+                    if(nombre.indexOf(searchbox) != -1){
                         results.innerHTML += `<div class="list-group-item list-group-item-action" onclick="searchFromResultList("`+ producto.name +`")">`+ producto.name +`</div>`;
                         results.style.display = "block";
                     }
