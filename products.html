@@ -55,10 +55,10 @@
     </div>
     <div id="searchbar">
       <h2>Todos los productos</h2>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" id="searchbox" type="search" placeholder="¿Qué producto buscas?" aria-label="¿Qué producto buscas?">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" id="searchbox" autocomplete="off" type="search" placeholder="¿Qué producto buscas?" aria-label="¿Qué producto buscas?">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchWhitButton()">Buscar</button>
+      </div>
     </div>
     <div>
       <div class="list-group" id="results"></div>
