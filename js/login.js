@@ -3,6 +3,8 @@
 //elementos HTML presentes.
 let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
 function onSignIn(){
+    var profile = googleUser.getBasicProfile();
+    mistorage.setItem('username', profile.getName());
     window.location.href = "inicio.html";
 }
 function getUserName(){
