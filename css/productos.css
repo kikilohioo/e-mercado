@@ -1,0 +1,41 @@
+#minmaxfilter{
+    margin-top: 20px;
+  }
+  #banner{
+    height: 280px;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    background-color: black;
+  }
+  #banner img{
+    width: 100%;
+    overflow: hidden;
+    filter:brightness(40%);
+  }
+  #searchbar{
+    position: absolute;
+    transform: translate(20px,-190px);
+  }
+  #searchbar h2{
+    color: white;
+    margin-bottom: 60px;
+  }
+  #results{
+    display: none;
+    position:absolute;
+    width: 295px;
+    z-index: 10;
+    transform: translate(20px,-20px);
+  }
+  @media(min-width: 370px){
+    #searchbox{
+      width: 295px;
+    }
+    #banner{
+    height: 250px;
+    }
+    #searchbar{
+      transform: translate(20px,-160px);
+    }
+  }
