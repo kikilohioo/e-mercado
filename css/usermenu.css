@@ -1,0 +1,16 @@
+.btn-default{
+    background-color: grey;
+    color: white;
+}
+.dropdown-menu li a{
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+.dropdown-menu li a{
+    padding-left: 10px;
+}
+.dropdown-menu li a:hover{
+    background-color: grey;
+    color:white;
+}
