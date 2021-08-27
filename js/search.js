@@ -18,35 +18,11 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     }else{
         results.style.display = "none";
     }
-});
+})
 
 function searchFromResultList(nombreart){
     let results = document.getElementById("results"); 
     results.style.display = "none";
     let searchbox = document.getElementById("searchbox").value;
     searchbox = nombreart;
-
- /*   fetch(PRODUCTS_URL)
-        .then(respuesta => respuesta.json())
-        .then(producto => { 
-            productgrid.innerHTML += 
-            `<a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="`+ producto.imgSrc + `" alt="`+ producto.name +`" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ producto.name +`</h4>
-                            <small class="text-muted">`+ producto.currency + ` ` + producto.cost + `</small>
-                        </div>
-                        <p class="mb-1">`+ producto.description +`</p>
-                        <p class="mb-1">Vendidos `+ producto.soldCount +`</p>
-                    </div>
-                </div>
-            </a>`;
-
-     })
-     .catch(error => alert(error)) */ 
-
 }
