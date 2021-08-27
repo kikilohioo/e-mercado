@@ -10,7 +10,7 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
                 for(let producto of productos){
                     let nombre = producto.name.toLowerCase();
                     if(nombre.indexOf(searchbox) != -1){
-                        results.innerHTML += `<div class="list-group-item list-group-item-action" onclick="searchFromResultList(`+ producto.name +`)">`+ producto.name +`</div>`;
+                        results.innerHTML += `<div class="list-group-item list-group-item-action" onclick="searchFromResultList("`+ producto.name +`")">`+ producto.name +`</div>`;
                         results.style.display = "block";
                     }
                 }
