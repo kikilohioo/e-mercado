@@ -2,7 +2,7 @@ let results = document.getElementById("results");
 let searchbox = document.getElementById("searchbox").value;
 
 function searchFromResultList(articulo){
-    searchbox = articulo;
+    /*searchbox = articulo;
     results.style.display = "none";
     let productgrid = document.getElementById("productgrid");
 
@@ -27,7 +27,7 @@ function searchFromResultList(articulo){
                     </div>
                 </a>`;
             }
-        }).catch(error => alert(error))
+        }).catch(error => alert(error))*/
 }
 
 document.getElementById("searchbox").addEventListener("keyup", function(e){
