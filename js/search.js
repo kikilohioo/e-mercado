@@ -13,8 +13,12 @@ document.getElementById("searchbox").addEventListener("keyup", function(e){
     .then(productos => {
         for(let producto of productos){
             let nombre = producto.name.toLowerCase();
-            if(nombre.indexOf(searchbox) != -1){
-                results.innerHTML += `<a href="#" class="list-group-item list-group-item-action">`+ producto.name +`</a>`;
+            if(searchbox.value != ""){
+                if(nombre.indexOf(searchbox) != -1){
+                    results.innerHTML += `<a href="#" class="list-group-item list-group-item-action">`+ producto.name +`</a>`;
+                }
+            }else{
+                results.style.display = "none";
             }
         }
     }).catch(error => alert(error))
