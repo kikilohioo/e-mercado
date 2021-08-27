@@ -71,13 +71,13 @@
 </head>
 
 <body class="text-center">
-    <form action="#" class="signin" onclick="getUserName()">
+    <form action="#" class="signin">
       <img src="img/login.png" alt="logo" width="330">
       <h3>Iniciar Sesión</h3>
       <input type="email" name="user" placeholder="Email" id="user" required>
       <br><input type="password" placeholder="Contraseña" name="pwd" id="pwd" required><span onclick="mostrarPwd()">mostrar</span>
       <input type="checkbox" name="sesinit" id="sesinit"><label for="sesinit">Mantener mi sesión iniciada</label>
-      <br><input type="submit" value="Iniciar Sesión" required>
+      <br><input type="submit" value="Iniciar Sesión" onclick="getUserName()" required>
       <p>o tambien puedes</p>
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
       <a href="register.html">¿Aun no tienes cuenta? Registrate</a>
