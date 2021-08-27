@@ -2,7 +2,7 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
-function onSignIn(){
+function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
     mistorage.setItem('username', profile.getName());
     window.location.href = "inicio.html";
