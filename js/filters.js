@@ -12,10 +12,10 @@ document.getElementById("sortByRel").addEventListener('click', function(e){
         
         //ordenar producto del array segun una propiedad de dicho producto
         productos.sort(function (a, b) {
-            if (a.soldCount > b.soldCount) {
+            if (a.soldCount < b.soldCount) {
               return 1;
             }
-            if (a.soldCount < b.soldCount) {
+            if (a.soldCount > b.soldCount) {
               return -1;
             }
             return 0;
