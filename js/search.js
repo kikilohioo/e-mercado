@@ -1,3 +1,5 @@
+/* DESPLEGAR, OCULTAR Y ACTUALZIAR LISTA DE RESULTADOS DE BUSQUEDA */
+
 document.getElementById("searchbox").addEventListener("keyup", function (e) {
     let results = document.getElementById("results");
     let searchbox = document.getElementById("searchbox").value.toLowerCase();
@@ -25,6 +27,8 @@ document.getElementById("searchbox").addEventListener("keyup", function (e) {
         results.style.display = "none";
     }
 })
+
+/* BUSQUEDA DESDE SELECCION DE LISTA DE RESULTADOS */
 
 function searchFromResultList(nombreart) {
     document.getElementById("results").style.display = "none";
@@ -57,6 +61,8 @@ function searchFromResultList(nombreart) {
         }).catch(error => alert(error))
 }
 
+/* BUSQUEDA DESDE BOTON DE BUSCAR */
+
 function searchWhitButton() {
     let search = document.getElementById("searchbox").value.toLowerCase();
     let results = document.getElementById("results");
@@ -87,6 +93,8 @@ function searchWhitButton() {
             }
         }).catch(error => alert(error))
 }
+
+/* BUSQUEDA AL PRESIONAR ENTER */
 
 document.getElementById("searchbox").addEventListener("keyup", function (event) {
     let results = document.getElementById("results");

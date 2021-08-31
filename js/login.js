@@ -1,14 +1,16 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
 let USERS_URL = "https://kikilohioo.github.io/e-mercado/users.json";
 let mistorage = window.localStorage;
+
+/* INICIO DE SESION CON GOOGLE */
 
 function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
     mistorage.setItem('username', profile.getName());
     window.location.href = "inicio.html";
 }
+
+/* INICIO DE SESION CON CREDENCIALES EN JSON(cvcommunitymanager@gmail.com o romi1999@gmail.com) */
+
 function getUserName(){
     let email = document.getElementById("user").value;
     fetch(USERS_URL)

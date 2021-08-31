@@ -1,5 +1,4 @@
-    
-    /*FILTRO DE ORDENAR POR RELEVANCIA(más vendidos)*/
+        /*FILTRO DE ORDENAR POR RELEVANCIA(más vendidos)*/
 
 document.getElementById("sortByRel").addEventListener('click', function(e){
     let productgrid = document.getElementById("productgrid");
