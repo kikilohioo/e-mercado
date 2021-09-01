@@ -17,15 +17,20 @@ document.getElementById("searchbox").addEventListener("keyup", function (e) {
                     for (let producto of productos) {
                         let nombre = producto.name.toLowerCase();
                         if (nombre.indexOf(searchbox) != -1) {
-                            results.innerHTML += `<div class="resultitem list-group-item list-group-item-action" onclick="searchFromResultList('` + producto.name + `')"><span>` + producto.name + `</span><span class="searchicon">&#128270;</span></div>`;
+                            results.innerHTML += `<button class="resultitem list-group-item list-group-item-action" onclick="searchFromResultList('` + producto.name + `')"><span>` + producto.name + `</span><span class="searchicon">&#128270;</span></button>`;
                             results.style.display = "block";
                         }
+                    }
+                    if(e.key == "ArrowDown"){
+                        document.getElementsByClassName("resultitem")[0].focus();
                     }
                 }).catch(error => alert(error))
         }
     } else {
         results.style.display = "none";
     }
+
+    
 })
 
 /* BUSQUEDA DESDE SELECCION DE LISTA DE RESULTADOS */
@@ -98,9 +103,9 @@ function searchWhitButton() {
 
 document.getElementById("searchbox").addEventListener("keyup", function (event) {
     let results = document.getElementById("results");
-    if (event.key === "Enter") {
+    if (event.key == "Enter") {
         event.preventDefault();
         document.getElementById("btnbuscar").click();
+        results.style.display = "none";
     }
-    results.style.display = "none";
 });
