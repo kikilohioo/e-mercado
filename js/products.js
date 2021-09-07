@@ -1,6 +1,11 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+function viewProduct(producto){
+    let productDisplay = window.localStorage.setItem('productDisplay', producto);
+    window.location.href = "product-info.html";
+}
+
 document.addEventListener("DOMContentLoaded", function (e) {
     let productgrid = document.getElementById("productgrid");
     productgrid.innerHTML = "";
@@ -10,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         .then(datos => {
             for(let producto of datos){
                 productgrid.innerHTML += 
-                `<a href="product-info.html" class="list-group-item list-group-item-action">
+                `<span onclick="viewProduct(`+`'` + producto.name + `'` +`)" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-3">
                             <img src="`+ producto.imgSrc + `" alt="`+ producto.name +`" class="img-thumbnail">
@@ -24,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             <p class="mb-1">Vendidos `+ producto.soldCount +`</p>
                         </div>
                     </div>
-                </a>`;
+                </span>`;
             }
         }).catch(error => alert(error))
 });

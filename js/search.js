@@ -17,7 +17,7 @@ document.getElementById("searchbox").addEventListener("keyup", function (e) {
                     for (let producto of productos) {
                         let nombre = producto.name.toLowerCase();
                         if (nombre.indexOf(searchbox) != -1) {
-                            results.innerHTML += `<button class="resultitem list-group-item list-group-item-action" onclick="searchFromResultList('` + producto.name + `')"><span>` + producto.name + `</span><span class="searchicon">&#128270;</span></button>`;
+                            results.innerHTML += `<button class="resultitem list-group-item list-group-item-action" onclick="searchFromResultList('` + producto.name + `')"><span>` + producto.name + `</span></button>`;
                             results.style.display = "block";
                         }
                     }

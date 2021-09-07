@@ -2,5 +2,15 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-
+    let productSearch = window.localStorage.getItem('productDisplay');
+    fetch(PRODUCTS_URL)
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            for(let info of datos){
+                if(info.name == productSearch){
+                    
+                }
+            }
+        })
+        .catch(error => alert(error))
 });
