@@ -28,6 +28,32 @@
       width:13px;
       padding:0
     }
+    #slider-container{
+      display: inline-block;
+      width: fit-content;
+      margin-right: 0px;
+    }
+    main{
+      display: flex;
+      padding: 15px;
+      font-family: 'Raleway', serif !important;
+    }
+    main h1{
+      font-family: 'Raleway', serif !important;
+      font-weight: bold;
+    }
+    #info-container{
+      display: inline-block;
+      margin-left: 15px;
+    }
+    #description{
+      max-width: 600px;
+    }
+    @media(max-width: 767px){
+      main{
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 
@@ -56,7 +82,9 @@
         </script>
     </div>
   </nav>
-  <main id="main"></main>
+  <main id="main">
+    <div id="slider-container"></div>
+  </main>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>

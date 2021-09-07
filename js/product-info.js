@@ -4,8 +4,9 @@
 document.addEventListener("DOMContentLoaded", function(e){
     let productSearch = window.localStorage.getItem('productDisplay');
     let main = document.getElementById("main");
-    main.innerHTML = "";
-    let slider = `<div class="w3-content w3-display-container pt-3" style="max-width:600px">`;
+    let sliderContainer = document.getElementById("slider-container");
+    sliderContainer.innerHTML = "";
+    let slider = `<div id="slider" class="w3-content w3-display-container" style="max-width:600px">`;
     fetch(PRODUCT_INFO_URL)
         .then(respuesta => respuesta.json())
         .then(datos => {
@@ -24,7 +25,11 @@ document.addEventListener("DOMContentLoaded", function(e){
                         slider += `<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(`+ i +`)"></span>`;
                     }
                     slider += `</div></div>`;
-                    main.innerHTML += slider;
+                    sliderContainer.innerHTML += slider;
+                    main.innerHTML += 
+                        `<div id="info-container"><h1>`+ info.name +`</h1>`+
+                        `<span style="width:100%">Vendidos `+ info.soldCount +`</span>`+
+                        `<p id="description">`+ info.description +`</p>`
                     showDivs(slideIndex);
                 }
             }
