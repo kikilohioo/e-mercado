@@ -3,7 +3,7 @@ const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/p
 const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
 const PRODUCTS_URL = "https://kikilohioo.github.io/e-mercado/products.json";
 const PRODUCT_INFO_URL = "https://kikilohioo.github.io/e-mercado/products-info.json";
-const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
+const PRODUCT_INFO_COMMENTS_URL = "https://kikilohioo.github.io/e-mercado/products-info-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
