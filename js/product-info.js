@@ -1,10 +1,11 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+let productSearch = window.localStorage.getItem('productDisplay');
+let main = document.getElementById("main");
+let sliderContainer = document.getElementById("slider-container");
+
 document.addEventListener("DOMContentLoaded", function(e){
-    let productSearch = window.localStorage.getItem('productDisplay');
-    let main = document.getElementById("main");
-    let sliderContainer = document.getElementById("slider-container");
     sliderContainer.innerHTML = "";
     let slider = `<div id="slider" class="w3-content w3-display-container" style="max-width:600px">`;
     fetch(PRODUCT_INFO_URL)
@@ -27,14 +28,31 @@ document.addEventListener("DOMContentLoaded", function(e){
                     slider += `</div></div>`;
                     sliderContainer.innerHTML += slider;
                     main.innerHTML += 
-                        `<div id="info-container"><h1>`+ info.name +`<h4><span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span></h4></h1>`+
-                        `<span style="width:100%;padding-top:15px">Vendidos `+ info.soldCount +`</span>`+
-                        `<p id="description">`+ info.description +`</p></div>`
+                        `<div id="info-container">
+                            <h1>`+ info.name +`
+                                <h4 id="stars-container">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </h4>
+                            </h1>`+
+                            `<span style="width:100%;padding-top:15px">Vendidos `+ info.soldCount +`</span>`+
+                            `<p id="description">`+ info.description +`</p>
+                        </div>`
                     showDivs(slideIndex);
+                }
+            }
+        })
+        .catch(error => alert(error));
+
+    fetch(PRODUCT_INFO_COMMENTS_URL)
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            for(let info of datos){
+                if(info.name == productSearch){
+                    
                 }
             }
         })
