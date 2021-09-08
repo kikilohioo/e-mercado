@@ -3,6 +3,7 @@
 //elementos HTML presentes.
 let productSearch = window.localStorage.getItem('productDisplay');
 let main = document.getElementById("main");
+let comments = document.getElementById("comments");
 let sliderContainer = document.getElementById("slider-container");
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -30,13 +31,7 @@ document.addEventListener("DOMContentLoaded", function(e){
                     main.innerHTML += 
                         `<div id="info-container">
                             <h1>`+ info.name +`
-                                <h4 id="stars-container">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </h4>
+                                <h4 id="stars-container"></h4>
                             </h1>`+
                             `<span style="width:100%;padding-top:15px">Vendidos `+ info.soldCount +`</span>`+
                             `<p id="description">`+ info.description +`</p>
@@ -52,6 +47,74 @@ document.addEventListener("DOMContentLoaded", function(e){
         .then(datos => {
             for(let info of datos){
                 if(info.name == productSearch){
+                    for(let comment of info.comments){
+                        if(comment.score == 5){
+                            comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
+                        }else if(comment.score == 4){
+                            comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
+                        }else if(comment.score == 3){
+                            comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
+                        }else if(comment.score == 2){
+                            comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
+                        }else{
+                            comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
+                        }
+                    }
                     
                 }
             }
