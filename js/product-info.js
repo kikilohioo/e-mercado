@@ -27,9 +27,13 @@ document.addEventListener("DOMContentLoaded", function(e){
                     slider += `</div></div>`;
                     sliderContainer.innerHTML += slider;
                     main.innerHTML += 
-                        `<div id="info-container"><h1>`+ info.name +`</h1>`+
-                        `<span style="width:100%">Vendidos `+ info.soldCount +`</span>`+
-                        `<p id="description">`+ info.description +`</p>`
+                        `<div id="info-container"><h1>`+ info.name +`<h4><span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span></h4></h1>`+
+                        `<span style="width:100%;padding-top:15px">Vendidos `+ info.soldCount +`</span>`+
+                        `<p id="description">`+ info.description +`</p></div>`
                     showDivs(slideIndex);
                 }
             }
