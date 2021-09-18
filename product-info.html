@@ -16,84 +16,17 @@
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/usermenu.css">
   <meta name="google-signin-client_id" content="96471566518-8qvr9dt10sj7prbsk48k4tpbrc1k9ut5.apps.googleusercontent.com">
-  <style>
-    .mySlides {
-      display:none
-    }
-    .w3-left, .w3-right, .w3-badge {
-      cursor:pointer
-    }
-    .w3-badge {
-      height:13px;
-      width:13px;
-      padding:0
-    }
-    #slider-container{
-      display: inline-block;
-      width: fit-content;
-      margin-right: 0px;
-    }
-    main{
-      display: flex;
-      padding: 15px;
-      font-family: 'Raleway', serif !important;
-    }
-    main h1{
-      font-family: 'Raleway', serif !important;
-      font-weight: bold;
-    }
-    #info-container{
-      display: inline-block;
-      margin-left: 15px;
-    }
-    #description{
-      max-width: 600px;
-      margin-top: 20px;
-    }
-    .fa-star{
-      font-size: 15px;
-    }
-    .comment p{
-      margin-top: 10px;
-    }
-    .comment h3 span{
-      font-size: 12px;
-    }
-    .comment{
-      margin: 15px;
-      padding: 15px;
-      background-color: rgb(240, 240, 240);
-      border-radius: 15px;
-    }
-    #new-comment{
-      margin: 15px;
-      padding: 15px;
-    }
-    #new-comment textarea{
-      resize: none;
-      height: 40px;
-      width: 100%;
-    }
-    @media(max-width: 767px){
-      main{
-        flex-wrap: wrap;
-      }
-      #slider-container{
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/info-prod.css">
 </head>
-
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <div class="btn-group" role="group" id="useroptions"></div>
+    <div class="d-flex flex-column flex-md-row justify-content-between collapse" id="collapseMenu">
+      <a class="py-2 d-none d-md-inline-block menu-item" href="inicio.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block menu-item" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block menu-item" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block menu-item" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block menu-item" href="cart.html">Mi carrito</a>
+      <div class="btn-group py-2 d-none d-md-inline-block menu-item" role="group" id="useroptions"></div>
         <script>
           function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
@@ -108,6 +41,7 @@
             });
           }
         </script>
+      <button id="menu" onclick="menu()" class="btn btn-primary"><i class="fas fa-bars"></i> </button>
     </div>
   </nav>
   <main id="main">
@@ -116,9 +50,21 @@
   <hr>
   <div id="comments">
     <div id="new-comment">
-      <h2>Añade un nuevo comentario</h2>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
-      <br><button>Agregar Comentario</button>
+      <h2>Añade una puntuación y comentario</h2>
+      <div id="puntuar">
+        <input value="5" type="radio" name="star" id="rate-5" required>
+        <label for="rate-5" class="fa fa-star"></label>
+        <input value="4" type="radio" name="star" id="rate-4">
+        <label for="rate-4" class="fa fa-star"></label>
+        <input value="3" type="radio" name="star" id="rate-3">
+        <label for="rate-3" class="fa fa-star"></label>
+        <input value="2" type="radio" name="star" id="rate-2">
+        <label for="rate-2" class="fa fa-star"></label>
+        <input value="1" type="radio" name="star" id="rate-1">
+        <label for="rate-1" class="fa fa-star"></label>
+      </div>
+      <textarea name="comentario" id="comentario" cols="30" rows="10" required></textarea>
+      <br><button type="button" id="add-comment" onclick="calificar()" class="btn btn-secondary">Agregar Comentario</button>
     </div>
   </div>
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -127,6 +73,7 @@
   <script src="js/product-info.js"></script>
   <script src="js/userconfirm.js"></script>
   <script src="js/slider.js"></script>
+  <script src="js/calificar.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>
 </html>

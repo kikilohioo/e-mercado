@@ -1,0 +1,109 @@
+.mySlides {
+    display:none
+  }
+  .w3-left, .w3-right, .w3-badge {
+    cursor:pointer
+  }
+  .w3-badge {
+    height:13px;
+    width:13px;
+    padding:0
+  }
+  #slider-container{
+    display: inline-block;
+    width: fit-content;
+    margin-right: 0px;
+  }
+  main{
+    display: flex;
+    padding: 15px;
+    font-family: 'Raleway', serif !important;
+  }
+  main h1{
+    font-family: 'Raleway', serif !important;
+    font-weight: bold;
+  }
+  #info-container{
+    display: inline-block;
+    margin-left: 15px;
+  }
+  #description{
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  .fa-star{
+    font-size: 15px;
+  }
+  .comment p{
+    margin-top: 10px;
+  }
+  .comment h3 span{
+    font-size: 12px;
+  }
+  .comment{
+    margin: 15px;
+    padding: 15px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 15px;
+  }
+  #new-comment{
+    margin: 15px 15px 35px 15px;
+    padding: 15px;
+  }
+  #new-comment textarea{
+    resize: none;
+    height: 40px;
+    width: 100%;
+  }
+  #add-comment{
+    float: right;
+  }
+  #star1,#star2,#star3,#star4,#star5{
+    cursor: pointer;
+  }
+  #puntuar{
+    width: fit-content;
+    padding-bottom: 15px;
+    transform: scaleX(-1)
+  }
+  #puntuar label{
+    transition: all 0.2s ease;
+  }
+  #puntuar input{
+    display: none;
+  }
+
+  /*Animáción y funcionalidad de marcar estrellas*/
+  #puntuar input:not(:checked) ~ label:hover,
+  #puntuar input:not(:checked) ~ label:hover ~ label{
+    color: orange;
+  }
+  #puntuar input:checked ~ label{
+    color: orange;
+  }
+  
+  #menu{
+    display: none;
+  }
+  #menu i{
+    font-size: 25px;
+  }
+  #collapseMenu{
+    padding: 0px 20px;
+    text-align: center;
+  }
+  #collapseMenu a{
+    transform: translateY(5px);
+  }
+  @media(max-width: 767px){
+    main{
+      flex-wrap: wrap;
+    }
+    #slider-container{
+      width: 100%;
+    }
+    #menu{
+      display: block;
+      width: fit-content;
+    }
+  }

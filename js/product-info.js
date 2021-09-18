@@ -1,6 +1,3 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
 let productSearch = window.localStorage.getItem('productDisplay');
 let main = document.getElementById("main");
 let comments = document.getElementById("comments");
@@ -9,6 +6,8 @@ let sliderContainer = document.getElementById("slider-container");
 document.addEventListener("DOMContentLoaded", function(e){
     sliderContainer.innerHTML = "";
     let slider = `<div id="slider" class="w3-content w3-display-container" style="max-width:600px">`;
+    
+    //Función que carga el carrusel e informacion sobre el producto
     fetch(PRODUCT_INFO_URL)
         .then(respuesta => respuesta.json())
         .then(datos => {
@@ -42,78 +41,50 @@ document.addEventListener("DOMContentLoaded", function(e){
         })
         .catch(error => alert(error));
 
+    //Función encargada de gestionar los comentarios
     fetch(PRODUCT_INFO_COMMENTS_URL)
         .then(respuesta => respuesta.json())
         .then(datos => {
+            //Comprobación de si existe un nuevo comentario agregado
+            if(localStorage.getItem('comentarios') !== null){
+                let comentario = JSON.parse(localStorage.getItem('comentarios'));
+                let scoreCount = "";
+                for(let i = 0; i < 5;i++){
+                    if(i < comentario.score){
+                        scoreCount += '<span class="fa fa-star checked"></span>'
+                    }else{
+                        scoreCount += '<span class="fa fa-star "></span>'
+                    }
+                }
+                comments.innerHTML += 
+                        `<div class="comment">
+                            <div class="score">
+                                `+ scoreCount +`
+                                <h3>`+ comentario.user +` <span>` + comentario.dateTime + `</span></h3>
+                            </div>
+                            <p>`+ comentario.description +`</p>
+                        </div>`;
+            }
+            //Carga de comentarios desde json
             for(let info of datos){
                 if(info.name == productSearch){
                     for(let comment of info.comments){
-                        if(comment.score == 5){
-                            comments.innerHTML += 
-                                `<div class="comment">
-                                    <div class="score">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
-                                    </div>
-                                    <p>`+ comment.description +`</p>
-                                </div>`;
-                        }else if(comment.score == 4){
-                            comments.innerHTML += 
-                                `<div class="comment">
-                                    <div class="score">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
-                                    </div>
-                                    <p>`+ comment.description +`</p>
-                                </div>`;
-                        }else if(comment.score == 3){
-                            comments.innerHTML += 
-                                `<div class="comment">
-                                    <div class="score">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
-                                    </div>
-                                    <p>`+ comment.description +`</p>
-                                </div>`;
-                        }else if(comment.score == 2){
-                            comments.innerHTML += 
-                                `<div class="comment">
-                                    <div class="score">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
-                                    </div>
-                                    <p>`+ comment.description +`</p>
-                                </div>`;
-                        }else{
-                            comments.innerHTML += 
-                                `<div class="comment">
-                                    <div class="score">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
-                                    </div>
-                                    <p>`+ comment.description +`</p>
-                                </div>`;
+                        let scoreCount ="";
+                        for(let i = 0; i < 5;i++){
+                            if(i < comment.score){
+                                scoreCount += '<span class="fa fa-star checked"></span>'
+                            }else{
+                                scoreCount += '<span class="fa fa-star "></span>'
+                            }
                         }
+                        comments.innerHTML += 
+                                `<div class="comment">
+                                    <div class="score">
+                                        `+ scoreCount +`
+                                        <h3>`+ comment.user +` <span>` + comment.dateTime + `</span></h3>
+                                    </div>
+                                    <p>`+ comment.description +`</p>
+                                </div>`;
                     }
                     
                 }
