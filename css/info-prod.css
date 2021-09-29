@@ -82,18 +82,8 @@
     color: orange;
   }
   
-  #menu{
-    display: none;
-  }
-  #menu i{
-    font-size: 25px;
-  }
-  #collapseMenu{
-    padding: 0px 20px;
+  #related-prod h3{
     text-align: center;
-  }
-  #collapseMenu a{
-    transform: translateY(5px);
   }
   @media(max-width: 767px){
     main{
@@ -101,9 +91,5 @@
     }
     #slider-container{
       width: 100%;
-    }
-    #menu{
-      display: block;
-      width: fit-content;
     }
   }
