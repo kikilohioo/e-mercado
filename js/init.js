@@ -49,4 +49,7 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  if((window.localStorage.getItem("username") == "" || window.localStorage.getItem("username") == undefined) && window.location.href != "index.html"){
+    window.location.href = "index.html";
+  }
 });
