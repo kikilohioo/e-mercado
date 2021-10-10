@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", function(e){
                 let articulos = items.articles;
                 for(let articulo of articulos){
                     listItemsContainer.innerHTML += 
-                    `<tr>
+                    `<tr style="font-size:15px">
                         <td class="d-none d-lg-block">
                             <img src="`+ articulo.src +`" width="50" alt="prod1">
                         </td>
                         <td>`+ articulo.name +`</td>
                         <td class="d-none d-lg-block">`+ articulo.currency + articulo.unitCost +`</td>
                         <td><input type="number" name="" id="" value="`+ articulo.count +`" style="width: 50px;"></td>
-                        <td>`+ articulo.unitCost +`</td>
+                        <td>`+ articulo.currency + articulo.unitCost +`</td>
                     </tr>`;
                 }
             }).
