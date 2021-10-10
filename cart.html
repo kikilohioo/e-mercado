@@ -32,7 +32,9 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
   <link rel="stylesheet" href="css/usermenu.css">
-  <meta name="google-signin-client_id" content="96471566518-8qvr9dt10sj7prbsk48k4tpbrc1k9ut5.apps.googleusercontent.com">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <meta name="google-signin-client_id"
+    content="96471566518-8qvr9dt10sj7prbsk48k4tpbrc1k9ut5.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -62,7 +64,8 @@
       </ul>
     </div>
     <div class="btn-group" style="border-radius: 5px;position: absolute;top: 8px; right: 10px;">
-      <button type="button" style="display: flex;align-items: center;" class="btn btn-default dropdown-toggle centerIcon" data-toggle="dropdown" aria-haspopup="true"
+      <button type="button" style="display: flex;align-items: center;"
+        class="btn btn-default dropdown-toggle centerIcon" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div id="username"></div>
       </button>
@@ -74,12 +77,12 @@
         <li>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="cart.html"><i class="fas fa-shopping-cart"
+          <a class="nav-link active" href="cart.html"><i class="fas fa-shopping-cart mr-1"
               style="font-size: 15px;color: grey;"></i>Mi carrito</a>
         </li>
         <hr>
-        <li><a href="#" onclick="signOut()" style="cursor: pointer;"><i class="fas fa-sign-out-alt"
-              style="color: grey;"></i>Sign Out</a></li>
+        <li><a href="#" onclick="signOut()" style="cursor: pointer;"><i class="fas mr-1 fa-sign-out-alt"
+              style="color: grey;"></i>Salir</a></li>
       </ul>
     </div>
     <script>
@@ -92,20 +95,230 @@
       }
 
       function onLoad() {
-        gapi.load('auth2', function() {
+        gapi.load('auth2', function () {
           gapi.auth2.init();
         });
       }
     </script>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container mb-2">
+  <div class="row">
+    <div class="container pt-2 col-lg-7 pb-4 col-12">
+      <h1 class="px-3">Mi Carrito</h1>
+      <div class="card">
+        <div class="card-header">
+          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#productosCarrito" role="button"
+            aria-expanded="true" aria-controls="productosCarrito">Productos del Carrito</a>
+          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#productosCarrito"
+            aria-expanded="true" aria-controls="productosCarrito">
+            <i class="fas fa-angle-down"></i>
+          </button>
+        </div>
+        <div class="card-body p-0 collapse show" id="productosCarrito">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="d-none">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col" class="d-none">Precio Unitario</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="d-none">
+                  <img src="img/car1.jpg" width="50" alt="prod1">
+                </td>
+                <td>Peugeot 208</td>
+                <td class="d-none">USD 18500,00</td>
+                <td><input type="number" name="" id="" value="1" style="width: 50px;"></td>
+                <td>USD 18500,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#metodoEnvio" role="button"
+            aria-expanded="false" aria-controls="metodoEnvio">Método de Envio</a>
+          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#metodoEnvio"
+            aria-expanded="false" aria-controls="metodoEnvio">
+            <i class="fas fa-angle-down"></i>
+          </button>
+        </div>
+        <div class="card-body p-0 collapse text-center" id="metodoEnvio">
+          <h5 class="pt-3 pb-2 font-weight-bold">Seleccione Método de Envio*</h5>
+          <div class="card">
+            <div class="card-head col-12 text-center pt-2">
+              <input type="radio" name="shiptype" id="standardship" class="">
+              <label for="standardship">Envio Standard(12 a 15 dias): $5,00</label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head col-12 text-center pt-2">
+              <input type="radio" name="shiptype" id="expressship" class="">
+              <label for="expressship">Envio Express(5 a 8 dias): $7,00</label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head col-12 text-center pt-2">
+              <input type="radio" name="shiptype" id="premiumship" class="">
+              <label for="premiumship">Envio Premium(2 a 5 dias): $15,005</label>
+            </div>
+          </div>
+          <div class="card text-center">
+            <div class="card-head p-1 pt-3 row-lg">
+              <h5 class="pb-2 font-weight-bold col-lg-5 d-inline-block">Seleccione su Pais*</h5>
+              <select name="pais" id="pais" class="col-3 p-2 mb-3">
+                <option value="UY">Uruguay</option>
+                <option value="AR">Argentina</option>
+                <option value="BR">Brasil</option>
+                <option value="CH">Chile</option>
+              </select>
+              <h5 class="pb-2 font-weight-bold col-lg-6 d-inline-block">Indique su Dirección*</h5>
+              <input type="text" name="direcc" id="direcc" class="col-12 col-lg-5 mb-3 ml-1" placeholder="Calle, Nº Puerta y Esquina">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#formasPago" role="button"
+            aria-expanded="false" aria-controls="formasPago">Fromas de Pago</a>
+          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#formasPago"
+            aria-expanded="false" aria-controls="formasPago">
+            <i class="fas fa-angle-down"></i>
+          </button>
+        </div>
+        <div class="card-body p-0 collapse text-center" id="formasPago">
+          <div class="col-12 my-2 col-lg-5 d-inline-block">
+            <input type="radio" name="paymethod" id="creditcard" class="">
+            <label for="creditcard" class="btn btn-light p-3" data-toggle="modal" data-target="#creditCardModal">
+              <i class="fas fa-plus pr-2"></i>Agregar Nueva Tarjeta de Crédito
+            </label>
+          </div>
+          <!-- Modal Tarjeta de Crédito -->
+          <div class="modal fade" id="creditCardModal" tabindex="-1" role="dialog"
+            aria-labelledby="creditCardModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="creditCardModalLabel"><i class="fas fa-plus pr-2"></i>Agregar Nueva
+                    Tarjeta de Crédito</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="cardselect p-2 col-12">
+                    <input type="radio" name="cardtype" id="visa">
+                    <label for="visa">
+                      <img src="img/visalogo.png" width="50" alt="visa" class="mr-5">
+                    </label>
+                    <input type="radio" name="cardtype" id="master">
+                    <label for="master">
+                      <img src="img/masterlogo.png" width="50" alt="visa">
+                    </label>
+                  </div>
+                  <hr>
+                  <div class="col-12">
+                    <h5 class="pt-3 text-left">Nombre y Apellido*</h5>
+                    <input type="text" name="name" id="name" class="col-12">
+                    <h5 class="pt-2 text-left">Numero de Tarjeta*</h5>
+                    <input type="number" name="number" id="number" class="col-12">
+                    <h5 class="pt-2 text-left">Fecha de Vencimiento*</h5>
+                    <input type="date" name="date" id="date" class="col-12 mb-2">
+                    <h5 class="mt-2 text-left col-6 d-inline-block">Código de Seguridad*</h5>
+                    <input type="number" name="passcode" id="passcode" class="col-4 "
+                      style="transform: translateY(-10px);">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-success">Agregar Tarjeta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!---------->
+          <div class="col-12 my-2 col-lg-5 d-inline-block">
+            <input type="radio" name="paymethod" id="transfer" class="">
+            <label for="transfer" class="btn btn-light p-3" data-toggle="modal" data-target="#transferModal">
+              <i class="fas fa-upload pr-2"></i>Adjuntar Transferencia Bancaria
+            </label>
+          </div>
+          <!-- Modal Transferencias -->
+          <div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="transferModalLabel"><i class="fas fa-upload pr-2"></i>Adjuntar
+                    Transferencia Bancaria</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="atach">
+                    <div
+                      style="border: 2px dotted rgb(131, 131, 131); max-width: 250px;margin-left: auto;margin-right: auto;"
+                      class="py-5"><i class="fas fa-upload"></i> Suelte aqui su archivo</div>o<br><button
+                      class="btn btn-info"><i class="fas fa-search pr-2"></i> Examinar Archivos</button>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-success">Adjuntar Transferencia</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!---------->
+        </div>
+      </div>
+    </div>
+    <div class="card col col-lg-4 mx-2 mt-3 h-auto">
+      <div class="card-header">
+        <h4 class="font-weight-bold">Resumen de Compra</h4>
+      </div>
+      <div class="card-body">
+        <br><span class="font-weight-bold" style="text-decoration:underline;">Articulos</span>
+        <style>
+          #prodresum td, #prodresum th{
+            width: max-content;
+          }
+        </style>
+        <table id="prodresum" style="border-collapse: collapse;" class="mb-5">
+          <tr>
+            <th>Nombre</th>
+            <th >Cantidad</th>
+            <th style="text-align: right;">Precio</th>
+          </tr>
+          <tr>
+            <td>Peugeot 208</td>
+            <td style="text-align: center;">1</td>
+            <td style="text-align: right;">USD 18500</td>
+          </tr>
+          <tr style="transform: translateY(10px);">
+            <td></td>
+            <td class="font-weight-bold">Sub TOTAL:</td>
+            <td>USD 18500</td>
+          </tr>
+        </table>
+        <span style="text-decoration:underline;" class="font-weight-bold">Datos de Envio</span>
+        <br>El pedido será enviado a Colonia 821, Las piedras con un Pedido Standard(12 a 15 dias)<br>
+        <span class="font-weight-bold">Costo de envio:</span> $5,00
+        <hr>
+        <h5 class="col text-center d-inline-block text-right pr-1">TOTAL </h5>
+        <h3 class="col text-center d-inline-block font-weight-bold "> $800.889,05</h3>
+        <button class="col-12 container btn btn-success">Finalizar Compra</button>
+      </div>
     </div>
   </div>
+</div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
