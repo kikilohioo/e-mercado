@@ -107,9 +107,9 @@
       <h1 class="px-3">Mi Carrito</h1>
       <div class="card">
         <div class="card-header">
-          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#productosCarrito" role="button"
+          <a class="btn btn-link col-9 col-lg-10 text-left" data-toggle="collapse" href="#productosCarrito" role="button"
             aria-expanded="true" aria-controls="productosCarrito">Productos del Carrito</a>
-          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#productosCarrito"
+          <button class="btn btn-light col-2 col-lg-1" type="button" data-toggle="collapse" data-target="#productosCarrito"
             aria-expanded="true" aria-controls="productosCarrito">
             <i class="fas fa-angle-down"></i>
           </button>
@@ -118,10 +118,10 @@
         <!-- Lista de Productos del Carrito -->
         
         <div class="card-body p-0 collapse show" id="productosCarrito">
-          <table class="table">
+          <table style="border-collapse: collapse; width: 100%;text-align: center;">
             <thead>
-              <tr>
-                <th scope="col" class="d-none d-lg-block h-100 mt-auto">#</th>
+              <tr style="border-bottom: 1px solid rgb(211, 211, 211);">
+                <th scope="col" class="d-none d-lg-block h-100 mt-auto p-2">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col" class="d-none d-lg-block">Precio/U</th>
                 <th scope="col">Cantidad</th>
@@ -132,13 +132,16 @@
               
             </tbody>
           </table>
+          <div id="footerProds" class="text-right p-3 mt-2" style="border-top: 1px solid rgb(211, 211, 211);">
+              
+          </div>
         </div>
       </div>
       <div class="card">
         <div class="card-header">
-          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#metodoEnvio" role="button"
+          <a class="btn btn-link col-9 col-lg-10 text-left" data-toggle="collapse" href="#metodoEnvio" role="button"
             aria-expanded="false" aria-controls="metodoEnvio">Método de Envio</a>
-          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#metodoEnvio"
+          <button class="btn btn-light col-2 col-lg-1" type="button" data-toggle="collapse" data-target="#metodoEnvio"
             aria-expanded="false" aria-controls="metodoEnvio">
             <i class="fas fa-angle-down"></i>
           </button>
@@ -147,49 +150,49 @@
           <h5 class="pt-3 pb-2 font-weight-bold">Seleccione Método de Envio*</h5>
           <div class="card">
             <div class="card-head col-12 text-center pt-2">
-              <input type="radio" name="shiptype" id="standardship" class="">
-              <label for="standardship">Envio Standard(12 a 15 dias): $5,00</label>
+              <input type="radio" name="shiptype" id="5" class="" form="finCompra" required data-shiptype="Envio Standard(12 a 15 dias)" onchange="updCart(this.id,this.name)">
+              <label for="standardship">Envio Standard(12 a 15 dias): <span id="envioStandard"></span></label>
             </div>
           </div>
           <div class="card">
             <div class="card-head col-12 text-center pt-2">
-              <input type="radio" name="shiptype" id="expressship" class="">
-              <label for="expressship">Envio Express(5 a 8 dias): $7,00</label>
+              <input type="radio" name="shiptype" id="7" class="" form="finCompra" required data-shiptype="Envio Express(5 a 8 dias)" onchange="updCart(this.id,this.name)">
+              <label for="expressship">Envio Express(5 a 8 dias): <span id="envioExpress"></span></label>
             </div>
           </div>
           <div class="card">
             <div class="card-head col-12 text-center pt-2">
-              <input type="radio" name="shiptype" id="premiumship" class="">
-              <label for="premiumship">Envio Premium(2 a 5 dias): $15,005</label>
+              <input type="radio" name="shiptype" id="15" class="" form="finCompra" required data-shiptype="Envio Premium(2 a 5 dias)" onchange="updCart(this.id,this.name)">
+              <label for="premiumship">Envio Premium(2 a 5 dias): <span id="envioPremium"></span></label>
             </div>
           </div>
           <div class="card text-center">
             <div class="card-head p-1 pt-3 row-lg">
               <h5 class="pb-2 font-weight-bold col-lg-5 d-inline-block">Seleccione su Pais*</h5>
-              <select name="pais" id="pais" class="col-3 p-2 mb-3">
-                <option value="UY">Uruguay</option>
-                <option value="AR">Argentina</option>
-                <option value="BR">Brasil</option>
-                <option value="CH">Chile</option>
+              <select name="pais" id="pais" class="col-3 p-2 mb-3" onchange="updateAll()">
+                <option value="Uruguay">Uruguay</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Chile">Chile</option>
               </select>
               <h5 class="pb-2 font-weight-bold col-lg-6 d-inline-block">Indique su Dirección*</h5>
-              <input type="text" name="direcc" id="direcc" class="col-12 col-lg-5 mb-3 ml-1" placeholder="Calle, Nº Puerta y Esquina">
+              <input type="text" name="direcc" id="direcc" onchange="updateAll()" form="finCompra" required class="col-12 col-lg-5 mb-3 ml-1" placeholder="Calle, Nº Puerta y Esquina">
             </div>
           </div>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-header">
-          <a class="btn btn-link col-9 text-left" data-toggle="collapse" href="#formasPago" role="button"
+          <a class="btn btn-link col-9 col-lg-10 text-left" data-toggle="collapse" href="#formasPago" role="button"
             aria-expanded="false" aria-controls="formasPago">Fromas de Pago</a>
-          <button class="btn btn-light col-2" type="button" data-toggle="collapse" data-target="#formasPago"
+          <button class="btn btn-light col-2 col-lg-1" type="button" data-toggle="collapse" data-target="#formasPago"
             aria-expanded="false" aria-controls="formasPago">
             <i class="fas fa-angle-down"></i>
           </button>
         </div>
         <div class="card-body p-0 collapse text-center" id="formasPago">
-          <div class="col-12 my-2 col-lg-5 d-inline-block">
-            <input type="radio" name="paymethod" id="creditcard" class="">
+          <div class="col-12 my-2 col-lg-5 d-inline-block pt-3">
+            <input type="radio" name="paymethod" id="creditcard" data-toggle="modal" data-target="#creditCardModal" class="" form="finCompra" required>
             <label for="creditcard" class="btn btn-light p-3" data-toggle="modal" data-target="#creditCardModal">
               <i class="fas fa-plus pr-2"></i>Agregar Nueva Tarjeta de Crédito
             </label>
@@ -239,7 +242,7 @@
           </div>
           <!---------->
           <div class="col-12 my-2 col-lg-5 d-inline-block">
-            <input type="radio" name="paymethod" id="transfer" class="">
+            <input type="radio" name="paymethod" id="transfer" data-toggle="modal" data-target="#transferModal" class="" form="finCompra" required>
             <label for="transfer" class="btn btn-light p-3" data-toggle="modal" data-target="#transferModal">
               <i class="fas fa-upload pr-2"></i>Adjuntar Transferencia Bancaria
             </label>
@@ -286,30 +289,27 @@
             width: max-content;
           }
         </style>
-        <table id="prodresum" style="border-collapse: collapse;" class="mb-5">
+        <table id="prodresum" style="width:100%;border-collapse: collapse;" class="mb-5">
           <tr>
             <th>Nombre</th>
-            <th >Cantidad</th>
+            <th style="text-align: center;">Cant.</th>
             <th style="text-align: right;">Precio</th>
           </tr>
-          <tr>
-            <td>Peugeot 208</td>
-            <td style="text-align: center;">1</td>
-            <td style="text-align: right;">USD 18500</td>
-          </tr>
-          <tr style="transform: translateY(10px);">
-            <td></td>
-            <td class="font-weight-bold">Sub TOTAL:</td>
-            <td>USD 18500</td>
-          </tr>
+          <tbody id="resumItems">
+            
+          </tbody>
         </table>
+        <div style="transform: translateY(10px);text-align: right;" class="mb-3" id="resumSubTotal">
+          
+        </div>
         <span style="text-decoration:underline;" class="font-weight-bold">Datos de Envio</span>
-        <br>El pedido será enviado a Colonia 821, Las piedras con un Pedido Standard(12 a 15 dias)<br>
-        <span class="font-weight-bold">Costo de envio:</span> $5,00
+        <br>El pedido será enviado a <span id="direccionEnvio">-</span> con un <span id="tipoEnvio">-</span><br>
+        <span class="font-weight-bold">Costo de envio:</span><span id="costoEnvio">-</span>
         <hr>
         <h5 class="col text-center d-inline-block text-right pr-1">TOTAL </h5>
-        <h3 class="col text-center d-inline-block font-weight-bold "> $800.889,05</h3>
-        <button class="col-12 container btn btn-success disabled">Finalizar Compra</button>
+        <h3 class="col text-center d-inline-block font-weight-bold " id="precioTotal"> $800.889,05</h3>
+        <form action="#" id="finCompra"></form>
+        <button class="col-12 container btn btn-success" form="finCompra">Finalizar Compra</button>
       </div>
     </div>
   </div>
