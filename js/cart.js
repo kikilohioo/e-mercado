@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     for(let articulo of carrito.articles) {
                         var precio;
                         if (articulo.currency == "USD") {
-                            precio = articulo.unitCost * articulo.count * cambio;
+                            precio = articulo.unitCost * articulo.count * cambio.toFixed(2);
                         } else {
                             precio = articulo.unitCost * articulo.count;
                         }
@@ -70,9 +70,7 @@ function updCart(id,type){
     //Contenedor de precio de producto*cantidad
     let resFpriceContainer = document.getElementById("resumTotPrice"+id);
     //Contenedor de cantidad de productos
-    let resCantidadContainer = document.getElementById("resumCantidad"+id);
-    //Contenedor de costo TOTAL
-    let costoTotal = document.getElementById("precioTotal");    
+    let resCantidadContainer = document.getElementById("resumCantidad"+id);  
 
     if(type == "cantidad"){
         let cant = document.getElementById(id).value;
