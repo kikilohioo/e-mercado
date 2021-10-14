@@ -14,8 +14,9 @@ var carrito = {
     },
     total: 0
 }
+let listItemsContainer = document.getElementById("productItems");
 document.addEventListener("DOMContentLoaded", function (e) {
-    let listItemsContainer = document.getElementById("productItems");
+    
     fetch(URL_COTI_API).
         then(respuesta => respuesta.json()).
         then(cotizacion => {
@@ -30,30 +31,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     for (let articulo of articulos) {
                         carrito.articles.push(articulo);
                     }
-                    for(let articulo of carrito.articles) {
-                        var precio;
-                        if (articulo.currency == "USD") {
-                            precio = articulo.unitCost.toFixed(2) * articulo.count * cambio.toFixed(2);
-                        } else {
-                            precio = articulo.unitCost.toFixed(2) * articulo.count;
-                        }
-                        carrito.subtotal += precio;
-                        listItemsContainer.innerHTML +=
-                            `<tr style="font-size:15px" >
-                                <td class="d-none d-lg-block p-2">
-                                    <img src="`+ articulo.src + `" width="50" alt="prod1">
-                                </td>
-                                <td class="p-2">`+ articulo.name + `</td>
-                                <td class="d-none d-lg-block p-2">`+ articulo.currency +` `+ articulo.unitCost + `</td>
-                                <td class="p-2"><input type="number" data-currency="`+ articulo.currency +`" data-unitprice="`+articulo.unitCost + `" onchange="updCart(this.id,this.name)" name="cantidad" id="`+ articulos.indexOf(articulo) +`" value="`+ articulo.count + `" style="width: 50px;"></td>
-                                <td class="p-2" id="finalPrice`+ articulos.indexOf(articulo) +`">$ `+ precio + `</td>
-                                <td class="p-2"></td>
-                            </tr>`;
-                        resumItems.innerHTML += 
-                        `<td>`+ articulo.name + `</td>
-                         <td style="text-align: center;" id="resumCantidad`+ articulos.indexOf(articulo) +`">`+ articulo.count + `</td>
-                         <td style="text-align: right;" id="resumTotPrice`+ articulos.indexOf(articulo) +`">$ `+ precio + `</td>`
-                    }
+                    updItems("first");
                     updateAll();
                 }).
                 catch(error => alert(error))
@@ -62,6 +40,36 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 });
+function updItems(type){
+    listItemsContainer.innerHTML = ""
+    resumItems.innerHTML = "";
+    for(let articulo of carrito.articles) {
+        var precio;
+        if (articulo.currency == "USD") {
+            precio = articulo.unitCost.toFixed(2) * articulo.count * cambio.toFixed(2);
+        } else {
+            precio = articulo.unitCost.toFixed(2) * articulo.count;
+        }
+        if(type == "first"){
+            carrito.subtotal += precio;
+        }
+        listItemsContainer.innerHTML +=
+            `<tr style="font-size:15px" >
+                <td class="d-none d-lg-block p-2">
+                    <img src="`+ articulo.src + `" width="50" alt="prod1">
+                </td>
+                <td class="p-2">`+ articulo.name + `</td>
+                <td class="d-none d-lg-block p-2">`+ articulo.currency +` `+ articulo.unitCost + `</td>
+                <td class="p-2"><input type="number" data-currency="`+ articulo.currency +`" data-unitprice="`+articulo.unitCost + `" onchange="updCart(this.id,this.name)" name="cantidad" id="`+ carrito.articles.indexOf(articulo) +`" value="`+ articulo.count + `" style="width: 50px;"></td>
+                <td class="p-2" id="finalPrice`+ carrito.articles.indexOf(articulo) +`">$ `+ precio.toFixed(2) + `</td>
+                <td class="p-2"><button onclick="updCart(`+ carrito.articles.indexOf(articulo) +`,'deleteprod')" class="btn btn-light"><i class="fas fa-trash" style="color:red"></i></button></td>
+            </tr>`;
+        resumItems.innerHTML += 
+        `<td>`+ articulo.name + `</td>
+         <td style="text-align: center;" id="resumCantidad`+ carrito.articles.indexOf(articulo) +`">`+ articulo.count + `</td>
+         <td style="text-align: right;" id="resumTotPrice`+ carrito.articles.indexOf(articulo) +`">$ `+ precio.toFixed(2) + `</td>`
+    }
+}
 function updCart(id,type){
     //------------LISTA DE PRODUCTOS--------------
     //Contenedor de precio de producto*cantidad
@@ -104,6 +112,15 @@ function updCart(id,type){
         carrito.envio.porc = id;
         carrito.envio.tipo = shiptype.dataset.shiptype;
         updateAll();
+    }else if(type == "deleteprod"){
+        if(carrito.articles[id].currency == "USD"){
+            carrito.subtotal = carrito.subtotal - (carrito.articles[id].unitCost*carrito.articles[id].count*cambio.toFixed(2));
+        }else{
+            carrito.subtotal = carrito.subtotal - (carrito.articles[id].unitCost*carrito.articles[id].count);
+        }
+        carrito.articles.splice(id,1);
+        updItems();
+        updateAll();
     }
 }
 
@@ -134,7 +151,7 @@ function updateAll(){
     //---------SUBTOTALES-------------------------
     subTotContainer.innerHTML = 
     `<tr style="border-bottom: 1px solid rgb(211, 211, 211);">
-        <span class="font-weight-bold d-inline-block">Sub-Total: </span><h4 class="d-inline-block ml-2">$ `+ carrito.subtotal +`</h4>
+        <span class="font-weight-bold d-inline-block">Sub-Total: </span><h4 class="d-inline-block ml-2">$ `+ carrito.subtotal.toFixed(2) +`</h4>
     </tr>`;
     resSubTotContainer.innerHTML = 
     `<span class="font-weight-bold">Sub TOTAL:</span>
@@ -142,7 +159,7 @@ function updateAll(){
     
 
     //--------UPDATE INFO ENVIO------------------
-    carrito.envio.costo = (carrito.subtotal.toFixed(2)*carrito.envio.porc.toFixed(2))/100;
+    carrito.envio.costo = (carrito.subtotal.toFixed(2)*carrito.envio.porc)/100;
     direccEnvio.innerHTML = document.getElementById("pais").value+", "+document.getElementById("direcc").value;
     costoEnvio.innerHTML =" $ " + carrito.envio.costo.toFixed(2);
     tipoEnvio.innerHTML = carrito.envio.tipo;
@@ -152,5 +169,5 @@ function updateAll(){
 
     //---------COSTO TOTAL-----------------------
     costoTotal.innerHTML = "$ ";
-    costoTotal.innerHTML += carrito.subtotal.toFixed(2) + carrito.envio.costo.toFixed(2);
+    costoTotal.innerHTML += carrito.subtotal + carrito.envio.costo;
 }
