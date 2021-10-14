@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     for(let articulo of carrito.articles) {
                         var precio;
                         if (articulo.currency == "USD") {
-                            precio = articulo.unitCost * articulo.count * cambio.toFixed(2);
+                            precio = articulo.unitCost.toFixed(2) * articulo.count * cambio.toFixed(2);
                         } else {
-                            precio = articulo.unitCost * articulo.count;
+                            precio = articulo.unitCost.toFixed(2) * articulo.count;
                         }
                         carrito.subtotal += precio;
                         listItemsContainer.innerHTML +=
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                                 <td class="d-none d-lg-block p-2">`+ articulo.currency +` `+ articulo.unitCost + `</td>
                                 <td class="p-2"><input type="number" data-currency="`+ articulo.currency +`" data-unitprice="`+articulo.unitCost + `" onchange="updCart(this.id,this.name)" name="cantidad" id="`+ articulos.indexOf(articulo) +`" value="`+ articulo.count + `" style="width: 50px;"></td>
                                 <td class="p-2" id="finalPrice`+ articulos.indexOf(articulo) +`">$ `+ precio + `</td>
+                                <td class="p-2"></td>
                             </tr>`;
                         resumItems.innerHTML += 
                         `<td>`+ articulo.name + `</td>
@@ -79,27 +80,27 @@ function updCart(id,type){
         
         if(carrito.articles[id].currency == "USD"){
             fpriceContainer.innerHTML ="$ ";
-            fpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost*cambio;
+            fpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost.toFixed(2)*cambio.toFixed(2);
             resFpriceContainer.innerHTML ="$ ";
-            resFpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost*cambio;
+            resFpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost.toFixed(2)*cambio.toFixed(2);
         }else{
             fpriceContainer.innerHTML ="$ ";
-            fpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost;
+            fpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost.toFixed(2);
             resFpriceContainer.innerHTML ="$ ";
-            resFpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost;
+            resFpriceContainer.innerHTML += carrito.articles[id].count*carrito.articles[id].unitCost.toFixed(2);
         }
         carrito.subtotal = 0;
         for(let articulo of carrito.articles){
             if(articulo.currency == "USD"){
-                carrito.subtotal += articulo.count*articulo.unitCost*cambio;
+                carrito.subtotal += articulo.count*articulo.unitCost*cambio.toFixed(2);
             }else{
-                carrito.subtotal += articulo.count*articulo.unitCost;
+                carrito.subtotal += articulo.count*articulo.unitCost.toFixed(2);
             }
         }
         updateAll();
     }else if(type == "shiptype"){
         let shiptype = document.getElementById(id);
-        carrito.envio.costo = (carrito.subtotal*id)/100;
+        carrito.envio.costo = (carrito.subtotal.toFixed(2)*id)/100;
         carrito.envio.porc = id;
         carrito.envio.tipo = shiptype.dataset.shiptype;
         updateAll();
@@ -137,19 +138,19 @@ function updateAll(){
     </tr>`;
     resSubTotContainer.innerHTML = 
     `<span class="font-weight-bold">Sub TOTAL:</span>
-    <span style="font-size:20px">$ `+ carrito.subtotal +`</span>`;
+    <span style="font-size:20px">$ `+ carrito.subtotal.toFixed(2) +`</span>`;
     
 
     //--------UPDATE INFO ENVIO------------------
-    carrito.envio.costo = (carrito.subtotal*carrito.envio.porc)/100;
+    carrito.envio.costo = (carrito.subtotal.toFixed(2)*carrito.envio.porc.toFixed(2))/100;
     direccEnvio.innerHTML = document.getElementById("pais").value+", "+document.getElementById("direcc").value;
-    costoEnvio.innerHTML =" $ " + carrito.envio.costo;
+    costoEnvio.innerHTML =" $ " + carrito.envio.costo.toFixed(2);
     tipoEnvio.innerHTML = carrito.envio.tipo;
-    envioStandard.innerHTML = " $ " + (carrito.subtotal*5)/100;
-    envioExpress.innerHTML = " $ " + (carrito.subtotal*7)/100;
-    envioPremium.innerHTML = " $ " + (carrito.subtotal*15)/100;
+    envioStandard.innerHTML = " $ " + (carrito.subtotal.toFixed(2)*5)/100;
+    envioExpress.innerHTML = " $ " + (carrito.subtotal.toFixed(2)*7)/100;
+    envioPremium.innerHTML = " $ " + (carrito.subtotal.toFixed(2)*15)/100;
 
     //---------COSTO TOTAL-----------------------
     costoTotal.innerHTML = "$ ";
-    costoTotal.innerHTML +=carrito.subtotal + carrito.envio.costo;
+    costoTotal.innerHTML += carrito.subtotal.toFixed(2) + carrito.envio.costo.toFixed(2);
 }
