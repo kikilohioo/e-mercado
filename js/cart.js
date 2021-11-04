@@ -225,3 +225,11 @@ function sendFormCompra(){
 function updPayMethodSelected(){
     document.getElementById("paymethodheader").dataset.paymethodSelected = "true";
 }
+
+//Función para deseleccionar metodo de pago si se cancela o cierra sin completar los datos
+
+function cancelPayMethod(){
+    document.getElementById("paymethodheader").dataset.paymethodSelected = "false";
+    document.getElementById("creditcard").checked = "false";
+    document.getElementById("transfer").checked = "false";
+}
