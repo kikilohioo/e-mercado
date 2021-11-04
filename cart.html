@@ -198,7 +198,7 @@
           <div class="card-body p-0 collapse text-center" id="formasPago">
             <div class="col-12 my-2 col-lg-5 d-inline-block pt-3">
               <input type="radio" name="paymethod" id="creditcard" data-toggle="modal" data-target="#creditCardModal"
-                class="" form="finCompra" onchange="updPayMethodSelected()" required>
+                class="" form="finCompra" onchange="updPayMethodSelected('creditcard')" required>
               <label for="creditcard" class="btn btn-light p-3" data-toggle="modal" data-target="#creditCardModal">
                 <i class="fas fa-plus pr-2"></i>Agregar Nueva Tarjeta de Crédito
               </label>
@@ -211,11 +211,11 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="creditCardModalLabel"><i class="fas fa-plus pr-2"></i>Agregar Nueva
                       Tarjeta de Crédito</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick="cancelPayMethod()" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body" id="formcreditcard" data-form-validated="false">
                     <div class="cardselect p-2 col-12">
                       <input type="radio" name="cardtype" id="visa">
                       <label for="visa">
@@ -249,7 +249,7 @@
             <!---------->
             <div class="col-12 my-2 col-lg-5 d-inline-block">
               <input type="radio" name="paymethod" id="transfer" data-toggle="modal" data-target="#transferModal"
-                class="" form="finCompra" onchange="updPayMethodSelected()" required>
+                class="" form="finCompra" onchange="updPayMethodSelected('transfer')" required>
               <label for="transfer" class="btn btn-light p-3" data-toggle="modal" data-target="#transferModal">
                 <i class="fas fa-upload pr-2"></i>Adjuntar Transferencia Bancaria
               </label>
@@ -266,15 +266,16 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body" id="formtransfer" data-form-validated="false">
                     <div class="atach">
                       <div
                         style="border: 2px dotted rgb(131, 131, 131); max-width: 250px;margin-left: auto;margin-right: auto;"
                         class="py-5"><i class="fas fa-upload"></i> Suelte aqui su archivo</div>o<br><button
-                        class="btn btn-info"><i class="fas fa-search pr-2"></i> Examinar Archivos</button>
+                        class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i class="fas fa-search pr-2"></i> Examinar Archivos</button>
                     </div>
                   </div>
                   <div class="modal-footer">
+                    <input type="file" class="d-none" value="" name="" onchange="validateTransfer()" id="selectarchivo">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-success">Adjuntar Transferencia</button>
                   </div>

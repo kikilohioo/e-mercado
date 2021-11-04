@@ -12,7 +12,8 @@ var carrito = {
         porc: 0,
         costo: 0
     },
-    total: 0
+    total: 0,
+    paymethod: ""
 }
 let listItemsContainer = document.getElementById("productItems");
 
@@ -199,6 +200,9 @@ function sendFormCompra(){
             <span aria-hidden="true">&times;</span>
             </button>
         </div>`;
+        setTimeout(function(){
+            document.getElementById("alert-container").innerHTML = "";
+        },3000);
     }else if(document.getElementById("direcc").value == ""){
         document.getElementById("alert-container").innerHTML =
         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -207,6 +211,9 @@ function sendFormCompra(){
             <span aria-hidden="true">&times;</span>
             </button>
         </div>`;
+        setTimeout(function(){
+            document.getElementById("alert-container").innerHTML = "";
+        },3000);
     }else if(paymethod.dataset.paymethodSelected != "true"){
         document.getElementById("alert-container").innerHTML =
         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -215,21 +222,68 @@ function sendFormCompra(){
             <span aria-hidden="true">&times;</span>
             </button>
         </div>`;
+        setTimeout(function(){
+            document.getElementById("alert-container").innerHTML = "";
+        },3000);
     }else{
-        document.getElementById("finCompra").submit();
+        validatePayMethod();
     }
 }
 
 //Función que actualiza el estado de seleccion de la forma de pago
 
-function updPayMethodSelected(){
+function updPayMethodSelected(paymethodtype){
     document.getElementById("paymethodheader").dataset.paymethodSelected = "true";
+    carrito.paymethod = paymethodtype;
 }
 
-//Función para deseleccionar metodo de pago si se cancela o cierra sin completar los datos
+//Función para validar si el metodo de pago seleccionado tiene los datos completos
 
-function cancelPayMethod(){
-    document.getElementById("paymethodheader").dataset.paymethodSelected = "false";
-    document.getElementById("creditcard").checked = "false";
-    document.getElementById("transfer").checked = "false";
+function validatePayMethod(){
+    if(carrito.paymethod == "creditcard"){
+        if(document.getElementById("formcreditcard").dataset.formValidated != "true"){
+            document.getElementById("alert-container").innerHTML =
+            `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>¡Casi!</strong> debes agregar los datos de tu tarjeta de crédito para finalizar la compra.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+            setTimeout(function(){
+                document.getElementById("alert-container").innerHTML = "";
+            },3000);
+        }else{
+            document.getElementById("formCompra").submit();
+        }
+    }else if(carrito.paymethod == "transfer"){
+        if(document.getElementById("formcreditcard").dataset.formValidated != "true"){
+            document.getElementById("alert-container").innerHTML =
+            `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>¡Casi!</strong> debes subir el comprobante de transferencia primero para finalizar la compra.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+            setTimeout(function(){
+                document.getElementById("alert-container").innerHTML = "";
+            },3000);
+        }else{
+            document.getElementById("formCompra").submit();
+        }
+    }
+}
+
+//Función para validar metodo de pago tarjeta de crédito
+
+function validateCreditCard(){
+
+}
+
+//Función para validar metodo de pago transferencia
+
+function validateTransfer(){
+    document.getElementById("formtransfer").innerHTML = 
+    `<h3>${document.getElementById("selectarchivo").value}</h3>
+    <button
+                        class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i class="fas fa-search pr-2"></i> Remplazar Archivo</button>`;
 }
