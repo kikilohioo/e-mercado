@@ -15,6 +15,9 @@ var carrito = {
     total: 0
 }
 let listItemsContainer = document.getElementById("productItems");
+
+//Función que trae toda la información de los productos del JSON
+
 document.addEventListener("DOMContentLoaded", function (e) {
     
     fetch(URL_COTI_API).
@@ -40,6 +43,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 });
+
+//Función que actualiza los articulos en la lista del carrito
+
 function updItems(type){
     listItemsContainer.innerHTML = ""
     resumItems.innerHTML = "";
@@ -70,6 +76,9 @@ function updItems(type){
          <td style="text-align: right;" id="resumTotPrice`+ carrito.articles.indexOf(articulo) +`">$ `+ precio.toFixed(2) + `</td>`
     }
 }
+
+//Función encargada de actualizar datos en cambio de cantidad, seleccion de tipo de envio y eleminar producto
+
 function updCart(id,type){
     //------------LISTA DE PRODUCTOS--------------
     //Contenedor de precio de producto*cantidad
@@ -108,6 +117,7 @@ function updCart(id,type){
         updateAll();
     }else if(type == "shiptype"){
         let shiptype = document.getElementById(id);
+        document.getElementById("shiptypeheader").dataset.shiptypeSelected = "true";
         carrito.envio.costo = (carrito.subtotal.toFixed(2)*id)/100;
         carrito.envio.porc = id;
         carrito.envio.tipo = shiptype.dataset.shiptype;
@@ -123,6 +133,9 @@ function updCart(id,type){
         updateAll();
     }
 }
+
+//Función encargada de actualizar todos los datos, 
+//basado en el objeto carrito que se modifica en relación a las otras funciones
 
 function updateAll(){
     //-----------------SUBTOTAL-------------------
@@ -170,4 +183,45 @@ function updateAll(){
     //---------COSTO TOTAL-----------------------
     costoTotal.innerHTML = "$ ";
     costoTotal.innerHTML += carrito.subtotal + carrito.envio.costo;
+}
+
+//Función que revisa estado de selección de metodo de envio y forma de pago
+
+function sendFormCompra(){
+    let paymethod = document.getElementById("paymethodheader");
+    let shiptype = document.getElementById("shiptypeheader");
+
+    if(shiptype.dataset.shiptypeSelected != "true"){
+        document.getElementById("alert-container").innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> primero debes seleccionar un tipo de envio.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+    }else if(paymethod.dataset.paymethodSelected != "true"){
+        document.getElementById("alert-container").innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> primero debes seleccionar un metodo de pago.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+    }else if(document.getElementById("direcc").value == ""){
+        document.getElementById("alert-container").innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> primero debes especificar una dirección de envio.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+    }else{
+        document.getElementById("finCompra").submit();
+    }
+}
+
+//Función que actualiza el estado de seleccion de la forma de pago
+
+function updPayMethodSelected(){
+    document.getElementById("paymethodheader").dataset.paymethodSelected = "true";
 }

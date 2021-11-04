@@ -1,3 +1,5 @@
+//Función encargada de confirmar el inicio de sesión
+
 document.addEventListener("DOMContentLoaded", function(e){
     let username = window.localStorage.getItem("username");
     let useroptions = document.getElementById("username");

@@ -1,6 +1,3 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
 let namelbl = document.getElementById("usernamelbl");
 let nameinp = document.getElementById("usernameinfo");
 let agelbl = document.getElementById("agelbl");
@@ -14,16 +11,21 @@ let direcinp = document.getElementById("direc");
 let cardfooter1 = document.getElementById("cardfooter1");
 let cardfooter2 = document.getElementById("cardfooter2");
 let editphoto = document.getElementById("btneditphoto");
+let usernickname = document.getElementById("usernickname");
 var imgElement = document.querySelector('#profilepic');
+
+//Función que se encarga de traer en tiempo de carga la información del localstorage
+//o se encargar de crear las variables necesarias para cargarlo posteriormente
 
 document.addEventListener("DOMContentLoaded", function (e) {
     let userinfo = {
-        name: "",
-        age: "",
-        email: "",
-        phone: "",
-        direc: ""
+        name: "---",
+        age: 0,
+        email: "---",
+        phone: "---",
+        direc: "---"
     }
+    usernickname.innerHTML = window.localStorage.getItem('username');
     if (window.localStorage.getItem('userinfo') != undefined) {
         let userInfo = JSON.parse(window.localStorage.getItem('userinfo'));
         let imgdata = window.localStorage.getItem('imgdata');
@@ -39,12 +41,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
         direcinp.value = userInfo.direc;
         if(window.localStorage.getItem('imgdata') != undefined){
             imgElement.src = imgdata;
+        }else{
+            imgElement.src = "https://i.ibb.co/yFgtKJw/499-4992374-sin-imagen-de-perfil-hd-png-download.png";
         }
     } else {
         window.localStorage.setItem('userinfo', JSON.stringify(userinfo));
         window.localStorage.setItem('imgdata', "https://i.ibb.co/yFgtKJw/499-4992374-sin-imagen-de-perfil-hd-png-download.png")
     }
 });
+
+//Función que nos permite activar los campos para modificar la info del perfil
 
 function activeEditInfo() {
     namelbl.innerHTML = "";
@@ -61,6 +67,8 @@ function activeEditInfo() {
     editphoto.style.display = "block"
     cardfooter1.style.display = "none"
 }
+
+//Función que oculta los campos para modificar info del perfil
 
 function cancelEditInfo() {
     let userInfo = JSON.parse(window.localStorage.getItem('userinfo'));
@@ -79,6 +87,8 @@ function cancelEditInfo() {
     cardfooter2.style.display = "none"
     imgElement.src = window.localStorage.getItem('imgdata');
 }
+
+//Función que confirma la edción de los datos, se encarga tanto de los datos como de la imagen del perfil
 
 function confirmEditInfo(){
     let userInfo = JSON.parse(window.localStorage.getItem('userinfo'));
@@ -107,12 +117,20 @@ function confirmEditInfo(){
     editphoto.style.display = "none"
     window.localStorage.setItem('userinfo', JSON.stringify(userInfo));
     let previmagedata = window.localStorage.getItem('previmgdata');
-    window.localStorage.setItem('imgdata', previmagedata);
+    if(window.localStorage.getItem('previmgdata') != undefined){
+        window.localStorage.setItem('imgdata', previmagedata);
+    }else{
+        window.localStorage.setItem('imgdata', 'https://i.ibb.co/yFgtKJw/499-4992374-sin-imagen-de-perfil-hd-png-download.png');
+    }
 }
+
+//Función para abrir openfiledialog
 
 function editPhoto(){
     document.getElementById('photoedit').click();
 }
+
+//Función encargada de cargar imagen como url de datos al localstorage
 
 function chargePhoto(newimage){
     const MAXIMO_TAMANIO_BYTES = 2000000;

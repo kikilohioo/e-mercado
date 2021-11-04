@@ -118,9 +118,12 @@
             </div>
         </div>
       </div>
-      <div class="row justify-content-end">
-        <div class="col-md-6"></div>
-          <div class="col-md-6 col-sm-12 mb-1 container">
+      <div class="row justify-content-around">
+          <div class="col-md-6 col-1">
+            <button class="btn btn-light" onclick="showListView()"><i class="fas fa-list"></i></button>
+            <button class="btn btn-light" onclick="showGridView()"><i class="fas fa-th-large"></i></button>
+          </div>
+          <div class="col-md-6 col-10 mb-1 container">
             <div class="row container p-0 m-0">
               <div class="col">
                 <p class="font-weight-normal text-right my-2">Cant.</p>
@@ -131,7 +134,7 @@
               <div class="col">
                 <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
               </div>
-              <div class="col-3 p-0">
+              <div class="col-12 col-md-3 p-0 text-center">
                 <div class="btn-group" role="group">
                   <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
                   <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
