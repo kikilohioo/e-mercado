@@ -182,7 +182,7 @@ function updateAll(){
 
     //---------COSTO TOTAL-----------------------
     costoTotal.innerHTML = "$ ";
-    costoTotal.innerHTML += carrito.subtotal + carrito.envio.costo;
+    costoTotal.innerHTML += (carrito.subtotal + carrito.envio.costo).toFixed(2);
 }
 
 //Función que revisa estado de selección de metodo de envio y forma de pago
