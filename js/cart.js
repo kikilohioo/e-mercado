@@ -199,18 +199,18 @@ function sendFormCompra(){
             <span aria-hidden="true">&times;</span>
             </button>
         </div>`;
-    }else if(paymethod.dataset.paymethodSelected != "true"){
-        document.getElementById("alert-container").innerHTML =
-        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>¡Atención!</strong> primero debes seleccionar un metodo de pago.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>`;
     }else if(document.getElementById("direcc").value == ""){
         document.getElementById("alert-container").innerHTML =
         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>¡Atención!</strong> primero debes especificar una dirección de envio.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+    }else if(paymethod.dataset.paymethodSelected != "true"){
+        document.getElementById("alert-container").innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> primero debes seleccionar un metodo de pago.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
