@@ -67,7 +67,7 @@ function updItems(type){
                 </td>
                 <td class="p-2">`+ articulo.name + `</td>
                 <td class="d-none d-lg-block p-2">`+ articulo.currency +` `+ articulo.unitCost + `</td>
-                <td class="p-2"><input type="number" data-currency="`+ articulo.currency +`" data-unitprice="`+articulo.unitCost + `" onchange="updCart(this.id,this.name)" name="cantidad" id="`+ carrito.articles.indexOf(articulo) +`" value="`+ articulo.count + `" style="width: 50px;"></td>
+                <td class="p-2"><input type="number" data-currency="`+ articulo.currency +`" data-unitprice="`+articulo.unitCost + `" onchange="updCart(this.id,this.name),controlQuantity(this.id)" name="cantidad" id="`+ carrito.articles.indexOf(articulo) +`" value="`+ articulo.count + `" style="width: 50px;"></td>
                 <td class="p-2" id="finalPrice`+ carrito.articles.indexOf(articulo) +`">$ `+ precio.toFixed(2) + `</td>
                 <td class="p-2"><button onclick="updCart(`+ carrito.articles.indexOf(articulo) +`,'deleteprod')" class="btn btn-light"><i class="fas fa-trash" style="color:red"></i></button></td>
             </tr>`;
@@ -79,6 +79,24 @@ function updItems(type){
 }
 
 //Función encargada de actualizar datos en cambio de cantidad, seleccion de tipo de envio y eleminar producto
+
+function controlQuantity(elemid){
+    let cantidad = document.getElementById(elemid);
+    if(cantidad.value <= 0){
+        cantidad.value = 1;
+        document.getElementById("alert-container").innerHTML =
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> la cantidad de articulos debe ser mayor a 0, si desea eliminar un producto utilice el ícono de papelera.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+        setTimeout(function(){
+            document.getElementById("alert-container").innerHTML = "";
+        },3000);
+        updCart(elemid,"cantidad");
+    }
+}
 
 function updCart(id,type){
     //------------LISTA DE PRODUCTOS--------------
@@ -241,6 +259,7 @@ function updPayMethodSelected(paymethodtype){
 
 function validatePayMethod(){
     if(carrito.paymethod == "creditcard"){
+        validateCreditCard();
         if(document.getElementById("formcreditcard").dataset.formValidated != "true"){
             document.getElementById("alert-container").innerHTML =
             `<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -253,10 +272,10 @@ function validatePayMethod(){
                 document.getElementById("alert-container").innerHTML = "";
             },3000);
         }else{
-            document.getElementById("formCompra").submit();
+            document.getElementById("btnactivemodalconfirm").click();
         }
     }else if(carrito.paymethod == "transfer"){
-        if(document.getElementById("formcreditcard").dataset.formValidated != "true"){
+        if(document.getElementById("formtransfer").dataset.formValidated != "true"){
             document.getElementById("alert-container").innerHTML =
             `<div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>¡Casi!</strong> debes subir el comprobante de transferencia primero para finalizar la compra.
@@ -268,7 +287,7 @@ function validatePayMethod(){
                 document.getElementById("alert-container").innerHTML = "";
             },3000);
         }else{
-            document.getElementById("formCompra").submit();
+            document.getElementById("btnactivemodalconfirm").click();
         }
     }
 }
@@ -276,14 +295,34 @@ function validatePayMethod(){
 //Función para validar metodo de pago tarjeta de crédito
 
 function validateCreditCard(){
-
+    let creditCardModalInputs = document.getElementsByClassName("validatedcc");
+    let countValidatedInputs = 0;
+    for(let input of creditCardModalInputs){
+        countValidatedInputs++;
+    }
+    if(countValidatedInputs >= 5){
+        document.getElementById("formcreditcard").dataset.formValidated = "true";
+        document.getElementById("formcreditcard").innerHTML = 
+    `<h3>Tarjeta de Crédito Agregada Exitosamente</h3>`;
+    }else{
+        document.getElementById("alert-container").innerHTML =
+            `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>¡Casi!</strong> debes agregar los datos de tu tarjeta de crédito para finalizar la compra.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+            setTimeout(function(){
+                document.getElementById("alert-container").innerHTML = "";
+            },3000);
+    }
 }
 
 //Función para validar metodo de pago transferencia
 
-function validateTransfer(){
+function validateTransfer(name){
+    document.getElementById("formtransfer").dataset.formValidated = "true";
     document.getElementById("formtransfer").innerHTML = 
-    `<h3>${document.getElementById("selectarchivo").value}</h3>
-    <button
-                        class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i class="fas fa-search pr-2"></i> Remplazar Archivo</button>`;
+    `<h3>${name}</h3>
+    <button class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i class="fas fa-search pr-2"></i> Remplazar Archivo</button>`;
 }

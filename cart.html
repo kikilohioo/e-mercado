@@ -211,17 +211,18 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="creditCardModalLabel"><i class="fas fa-plus pr-2"></i>Agregar Nueva
                       Tarjeta de Crédito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" id="btnclosecreditmodal" data-dismiss="modal"
+                      aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body" id="formcreditcard" data-form-validated="false">
                     <div class="cardselect p-2 col-12">
-                      <input type="radio" name="cardtype" id="visa">
+                      <input type="radio" onchange="autoValidate(this)" name="cardtype" id="visa">
                       <label for="visa">
                         <img src="img/visalogo.png" width="50" alt="visa" class="mr-5">
                       </label>
-                      <input type="radio" name="cardtype" id="master">
+                      <input type="radio" onchange="autoValidate(this)" name="cardtype" id="master">
                       <label for="master">
                         <img src="img/masterlogo.png" width="50" alt="visa">
                       </label>
@@ -229,20 +230,31 @@
                     <hr>
                     <div class="col-12">
                       <h5 class="pt-3 text-left">Nombre y Apellido*</h5>
-                      <input type="text" name="name" id="name" class="col-12">
+                      <input type="text" onchange="autoValidate(this)" name="name" id="name" class="col-12">
                       <h5 class="pt-2 text-left">Numero de Tarjeta*</h5>
-                      <input type="number" name="number" id="number" class="col-12">
+                      <input type="number" onchange="autoValidate(this)" name="number" id="number" class="col-12">
                       <h5 class="pt-2 text-left">Fecha de Vencimiento*</h5>
-                      <input type="date" name="date" id="date" class="col-12 mb-2">
+                      <input type="date" onchange="autoValidate(this)" name="date" id="date" class="col-12 mb-2">
                       <h5 class="mt-2 text-left col-6 d-inline-block">Código de Seguridad*</h5>
-                      <input type="number" name="passcode" id="passcode" class="col-4 "
+                      <input type="number" onchange="autoValidate(this)" name="passcode" id="passcode" class="col-4 "
                         style="transform: translateY(-10px);">
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success">Agregar Tarjeta</button>
+                    <button type="button" class="btn btn-success"
+                      onclick="validateCreditCard(),document.getElementById('btnclosecreditmodal').click()">Agregar
+                      Tarjeta</button>
                   </div>
+                  <script>
+                    function autoValidate(elem) {
+                      if (elem.value != "") {
+                        elem.classList.add("validatedcc");
+                      } else {
+                        elem.classList.remove("validatedcc");
+                      }
+                    }
+                  </script>
                 </div>
               </div>
             </div>
@@ -262,7 +274,8 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="transferModalLabel"><i class="fas fa-upload pr-2"></i>Adjuntar
                       Transferencia Bancaria</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" id="btnclosetransfermodal" data-dismiss="modal"
+                      aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -270,14 +283,43 @@
                     <div class="atach">
                       <div
                         style="border: 2px dotted rgb(131, 131, 131); max-width: 250px;margin-left: auto;margin-right: auto;"
-                        class="py-5"><i class="fas fa-upload"></i> Suelte aqui su archivo</div>o<br><button
-                        class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i class="fas fa-search pr-2"></i> Examinar Archivos</button>
+                        class="py-5" id="dropfile" ondragover="dragOverHandler(event)" ondrop="dragHandler(event)"><i
+                          class="fas fa-upload"></i> Suelte aqui su archivo</div>o<br>
+                      <button class="btn btn-info" onclick="document.getElementById('selectarchivo').click()"><i
+                          class="fas fa-search pr-2"></i>
+                        Examinar Archivos</button>
+                      <script>
+                        function dragOverHandler(ev) {
+                          ev.preventDefault();
+                        }
+                        function dragHandler(ev) {
+                          ev.preventDefault();
+
+                          if (ev.dataTransfer.items) {
+                            // Usar la interfaz DataTransferItemList para acceder a el/los archivos)
+                            for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                              // Si los elementos arrastrados no son ficheros, rechazarlos
+                              if (ev.dataTransfer.items[i].kind === 'file') {
+                                var file = ev.dataTransfer.items[i].getAsFile();
+                                validateTransfer(`C:\\fakepath\\` + file.name);
+                              }
+                            }
+                          } else {
+                            // Usar la interfaz DataTransfer para acceder a el/los archivos
+                            for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                              validateTransfer(`C:\\fakepath\\` + ev.dataTransfer.files[i].name);
+                            }
+                          }
+                        }
+                      </script>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <input type="file" class="d-none" value="" name="" onchange="validateTransfer()" id="selectarchivo">
+                    <input type="file" class="d-none" value="" name=""
+                      onchange="validateTransfer(document.getElementById('selectarchivo').value)" id="selectarchivo">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success">Adjuntar Transferencia</button>
+                    <button type="button" class="btn btn-success"
+                      onclick="document.getElementById('btnclosetransfermodal').click()">Adjuntar Transferencia</button>
                   </div>
                 </div>
               </div>
@@ -316,7 +358,7 @@
           <span class="font-weight-bold">Costo de envio:</span><span id="costoEnvio">-</span>
           <hr>
           <h5 class="col text-center d-inline-block text-right pr-1">TOTAL </h5>
-          <h3 class="col text-center d-inline-block font-weight-bold " id="precioTotal"> $800.889,05</h3>
+          <h3 class="col text-center d-inline-block font-weight-bold " id="precioTotal"></h3>
           <form action="#" id="finCompra"></form>
           <button class="col-12 container btn btn-success" onclick="sendFormCompra()">Finalizar Compra</button>
         </div>
@@ -324,6 +366,23 @@
     </div>
   </div>
   <div id="alert-container"></div>
+  <div id="compra-confirmada">
+    <button type="button" class="btn btn-primary d-none" id="btnactivemodalconfirm" data-toggle="modal"
+      data-target="#exampleModalCenter">
+      Launch demo modal
+    </button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center justify-content-between">
+            <h1 class="mt-4 pb-5">¡Has comprado con éxito!</h1>
+            <a class="btn btn-success" href="categories.html">Seguir comprando</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
